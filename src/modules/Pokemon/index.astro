@@ -1,0 +1,29 @@
+---
+import HeadLayout from "@layouts/HeadLayout.astro";
+import Card from "@components/Card/index.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Navbar from "@components/Navbar/index.astro";
+import TextField from "@components/Common/TextField.astro";
+import ListLayout from "@layouts/ListLayout.astro";
+import PokemonService from "@services/pokemon.service";
+
+const data = await PokemonService.getPokemon();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <HeadLayout title="Pokemon" />
+  <body>
+    <Navbar />
+    <BaseLayout>
+      <TextField />
+      <ListLayout>
+        {
+          data.results.map((x: { name: string; id: number }) => (
+            <Card title={x.name} />
+          ))
+        }
+      </ListLayout>
+    </BaseLayout>
+  </body>
+</html>
