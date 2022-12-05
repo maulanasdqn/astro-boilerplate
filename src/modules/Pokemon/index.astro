@@ -19,8 +19,8 @@ const data = await PokemonService.getPokemon();
       <TextField />
       <ListLayout>
         {
-          data.results.map((x: { name: string; id: number }) => (
-            <Card title={x.name} />
+          data.results.map((x: { name: string; url: string }, i: number) => (
+            <Card title={x.name} id={i + 1} />
           ))
         }
       </ListLayout>
